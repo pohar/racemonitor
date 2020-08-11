@@ -1,4 +1,4 @@
-#include "r3e-api/sample-c/src/r3e.h"
+#include "../r3e-api/sample-c/src/r3e.h"
 
 #define PACKET_VERSION 100
 
