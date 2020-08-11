@@ -11,15 +11,16 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 #requires(qtConfig(udpsocket))
 
-TARGET = proba
+TARGET = RaceClient
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp
+SOURCES += main.cpp \
+    RaceClient.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     ../common/common.h \
-    ../r3e-api/sample-c/src/r3e.h
+    ../r3e-api/sample-c/src/r3e.h \
+    RaceClient.h
 
 FORMS    += mainwindow.ui
