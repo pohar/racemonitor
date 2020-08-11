@@ -171,7 +171,7 @@ void MainWindow::run()
     }
 
     int sent = udpSocket.writeDatagram((const char *)&sendpacket, sizeof(sendpacket), host, port);
-    qDebug("Bytes sent: %d", sent);
+    //qDebug("Bytes sent: %d", sent);
     if(sent==-1)
     {
         qDebug(udpSocket.errorString().toLocal8Bit());
