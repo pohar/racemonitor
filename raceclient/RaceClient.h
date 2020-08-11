@@ -4,28 +4,30 @@
 #include <QMainWindow>
 #include <QUdpSocket>
 #include "..\common\common.h"
-
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class RaceClient : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    explicit RaceClient(QWidget *parent = 0);
+    ~RaceClient();
 
 public slots:
     void readData();
+    void UpdateUI();
 
 private:
     QUdpSocket udpSocket;
     Ui::MainWindow *ui;
     QHostAddress host;
     packet_t gameinfo;
+    QTimer updater;
 };
 
 #endif // MAINWINDOW_H

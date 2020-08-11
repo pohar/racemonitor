@@ -1,13 +1,15 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "RaceClient.h"
+#include "ui_MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+RaceClient::RaceClient(QWidget *parent) :
     QMainWindow(parent)
   , udpSocket(this)
     , ui(new Ui::MainWindow)
   ,host("192.168.0.213")
+  ,updater(this)
 {
     qDebug("Start!");
+    //ui->label_LapValid->setText("Valid lap");
     bool ret=udpSocket.bind( /* host, */ 7755);
     if(!ret)
     {
@@ -16,16 +18,18 @@ MainWindow::MainWindow(QWidget *parent) :
         //return;
      }
 
-    connect(&udpSocket, &QUdpSocket::readyRead, this, &MainWindow::readData);
+    connect(&udpSocket, &QUdpSocket::readyRead, this, &RaceClient::readData);
+    connect(&updater, SIGNAL(timeout()), this, SLOT(UpdateUI()));
+    updater.start(10/*INTERVAL_MS*/);
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
+RaceClient::~RaceClient()
 {
     delete ui;
 }
 
-void MainWindow::readData()
+void RaceClient::readData()
 {
 // QByteArray buffer;
 // buffer.resize(udpSocket.pendingDatagramSize());
@@ -46,4 +50,10 @@ void MainWindow::readData()
  qDebug("time_delta_best_self: %.3f\n", gameinfo.time_delta_best_self);
  qDebug("MY lap time: %d", gameinfo.myelapsed);
  qDebug("MY lap_time_previous: %d\n", gameinfo.myLastLapTime);
+
+}
+
+void RaceClient::UpdateUI()
+{
+    ui->label_LapValid->setText(gameinfo.isLapValid?"Lap invalid":"Lap invalid");
 }
