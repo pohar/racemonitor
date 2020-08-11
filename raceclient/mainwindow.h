@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QUdpSocket>
-//#include <QHost>
+#include "..\common\common.h"
 
 
 namespace Ui {
@@ -25,6 +25,7 @@ private:
     QUdpSocket udpSocket;
     Ui::MainWindow *ui;
     QHostAddress host;
+    packet_t gameinfo;
 };
 
 #endif // MAINWINDOW_H

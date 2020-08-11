@@ -18,6 +18,8 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    ../common/common.h \
+    ../r3e-api/sample-c/src/r3e.h
 
 FORMS    += mainwindow.ui
