@@ -57,6 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     , udpSocket(this)
     , host(/*"192.168.0.213"*/ /*QHostAddress::LocalHost*/ "192.168.0.242")
     , port(7755)
+    , myinvalid(true)
 {
     clk_start = 0, clk_last = 0;
     clk_delta_ms = 0, clk_elapsed = 0;
@@ -76,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     connect(&updater, SIGNAL(timeout()), this, SLOT(run()));
-    connect(&udpSocket,SIGNAL(readyRead()),this,SLOT(readPendingDatagrams()));
+    //connect(&udpSocket,SIGNAL(readyRead()),this,SLOT(readPendingDatagrams()));
 
     updater.start(INTERVAL_MS);
 
@@ -85,7 +86,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::readPendingDatagrams()
 {
-    QHostAddress sender;
+/*    QHostAddress sender;
     quint16 port;
     while (udpSocket.hasPendingDatagrams())
     {
@@ -96,6 +97,7 @@ void MainWindow::readPendingDatagrams()
        qDebug() <<"Port From :: "<< port;
        qDebug() <<"Message :: " << datagram;
    }
+   */
 }
 
 void MainWindow::run()
@@ -143,14 +145,17 @@ void MainWindow::run()
             }
 */
             qDebug("current_lap_valid: %d",map_buffer->current_lap_valid);
+            qDebug("lap_distance_fraction: %.3f",map_buffer->lap_distance_fraction);
             qDebug("lap_time_current_self: %.3f\n", map_buffer->lap_time_current_self);
             if(
-                    ((map_buffer->lap_time_current_self!=-1) & (map_buffer->lap_time_current_self < ex_lap_time_current_self)) // lap becoming invalid
-                    |((ex_lap_time_current_self ==-1) & (map_buffer->lap_time_current_self!=-1)) )
+                   /* ((map_buffer->lap_time_current_self!=-1) & (map_buffer->lap_time_current_self < ex_lap_time_current_self)) // lap becoming invalid
+                    |((ex_lap_time_current_self ==-1) & (map_buffer->lap_time_current_self!=-1))
+                    |*/((ex_lap_distance_fraction>0.95) & (map_buffer->lap_distance_fraction<0.1)))
             {
                 onNewLap();
             }
             ex_lap_time_current_self = map_buffer->lap_time_current_self;
+            ex_lap_distance_fraction = map_buffer->lap_distance_fraction;
             qDebug("lap_time_previous_self: %.3f", map_buffer->lap_time_previous_self);
             qDebug("time_delta_best_self: %.3f\n", map_buffer->time_delta_best_self);
 
@@ -190,4 +195,6 @@ MainWindow::~MainWindow()
 void MainWindow::onNewLap()
 {
     myLastLapTime = myCurrentLapTimeStart.restart();
+
+    myinvalid=true;
 }

@@ -41,6 +41,7 @@ private:
     int err_code ;
     bool mapped_r3e ;
     r3e_float32 ex_lap_time_current_self;
+    r3e_float32 ex_lap_distance_fraction;
     QElapsedTimer myCurrentLapTimeStart;
     int myCurrentLapTime;
     int myLastLapTime;
@@ -48,6 +49,7 @@ private:
     QUdpSocket udpSocket;
     const QHostAddress host;
     quint16 port;
+    bool myinvalid;
 
     void map_close();
     int map_init();
