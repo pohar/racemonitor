@@ -3,9 +3,9 @@ repo:
   - ./*
   
 Server:
-  - RaceServer/*
-  - RaceServer/**/*
+  - raceserver/*
+  - raceserver/**/*
 
 Client:
-  - RaceServer/*
-  - RaceServer/**/*
+  - raceclient/*
+  - raceclient/**/*
