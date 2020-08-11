@@ -30,7 +30,6 @@ public:
     ~MainWindow();
 public slots:
     void run();
-    void readPendingDatagrams();
 
 private:
     Ui::MainWindow *ui;

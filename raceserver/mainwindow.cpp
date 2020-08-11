@@ -77,27 +77,9 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     connect(&updater, SIGNAL(timeout()), this, SLOT(run()));
-    //connect(&udpSocket,SIGNAL(readyRead()),this,SLOT(readPendingDatagrams()));
-
     updater.start(INTERVAL_MS);
 
     ui->setupUi(this);
-}
-
-void MainWindow::readPendingDatagrams()
-{
-/*    QHostAddress sender;
-    quint16 port;
-    while (udpSocket.hasPendingDatagrams())
-    {
-        QByteArray datagram;
-        datagram.resize(udpSocket.pendingDatagramSize());
-        udpSocket.readDatagram(datagram.data(),datagram.size(),&sender,&port);
-       qDebug() <<"Message From :: " << sender.toString();
-       qDebug() <<"Port From :: "<< port;
-       qDebug() <<"Message :: " << datagram;
-   }
-   */
 }
 
 void MainWindow::run()
