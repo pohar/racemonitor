@@ -55,5 +55,14 @@ void RaceClient::readData()
 
 void RaceClient::UpdateUI()
 {
-    ui->label_LapValid->setText(gameinfo.isLapValid?"Lap invalid":"Lap invalid");
+    if(gameinfo.isLapValid)
+    {
+        ui->label_LapValid->show();
+        ui->label_LapInvalid->hide();
+    }
+    else
+    {
+        ui->label_LapValid->hide();
+        ui->label_LapInvalid->show();
+    }
 }
