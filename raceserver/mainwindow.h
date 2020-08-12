@@ -13,7 +13,7 @@
 #include <tchar.h>
 #include <QTimer>
 #include "../r3e-api/sample-c/src/r3e.h"
-#include "../r3e-api/sample-c/src/utils.h"
+//#include "../r3e-api/sample-c/src/utils.h"
 #include "../common/common.h"
 
 QT_BEGIN_NAMESPACE

@@ -24,7 +24,7 @@ HEADERS += \
     ../common/common.h \
     ../r3e-api/sample-c/src/r3e.h \
     ../r3e-api/sample-c/src/utils.h \
-    common/common.h \
+    ../common/common.h \
     mainwindow.h \
 
 

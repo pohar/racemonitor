@@ -1,10 +1,15 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
-
+extern "C" {
+BOOL is_process_running(const TCHAR* name);
+BOOL is_r3e_running();
+}
+#include "../r3e-api/sample-c/src/utils.h"
 
 #define ALIVE_SEC 600
 #define INTERVAL_MS 100
+
+
 
 HANDLE MainWindow::map_open()
 {
