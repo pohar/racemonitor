@@ -24,3 +24,8 @@ HEADERS  += \
     RaceClient.h
 
 FORMS    += mainwindow.ui
+
+DISTFILES +=
+
+RESOURCES += \
+    RaceClient.qrc

@@ -1,5 +1,7 @@
 #include "RaceClient.h"
 #include "ui_MainWindow.h"
+#include <QTime>
+#include <QFontDatabase>
 
 RaceClient::RaceClient(QWidget *parent) :
     QMainWindow(parent)
@@ -18,10 +20,17 @@ RaceClient::RaceClient(QWidget *parent) :
         //return;
      }
 
+    int id = QFontDatabase::addApplicationFont(":/fonts/fonts/digital-7.mono.ttf");
+    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    QFont digitalfont(family);
+
+
     connect(&udpSocket, &QUdpSocket::readyRead, this, &RaceClient::readData);
     connect(&updater, SIGNAL(timeout()), this, SLOT(UpdateUI()));
     updater.start(10/*INTERVAL_MS*/);
     ui->setupUi(this);
+    ui->label_LapTime->setFont(digitalfont);
+    ui->label_LapTime->setStyleSheet("QLabel { background-color : black; color : white; font: 50pt;}");
 }
 
 RaceClient::~RaceClient()
@@ -65,4 +74,8 @@ void RaceClient::UpdateUI()
         ui->label_LapValid->hide();
         ui->label_LapInvalid->show();
     }
+
+    QTime laptime(0,0);  //(54533 /*gameinfo.lap_time_current_self*/);
+    ui->label_LapTime->setText( laptime.addMSecs(34523).toString("mm:ss.zzz") );
+    //ui->progressBar_LapPerc->value();
 }
