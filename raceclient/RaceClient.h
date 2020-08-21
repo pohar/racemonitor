@@ -5,6 +5,7 @@
 #include <QUdpSocket>
 #include "..\common\common.h"
 #include <QTimer>
+#include <QLabel>
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +23,9 @@ public slots:
     void readData();
     void UpdateUI();
 
+protected:
+    void SetLabelFontStlye(QLabel* label, QFont& font);
+    
 private:
     QUdpSocket udpSocket;
     Ui::MainWindow *ui;

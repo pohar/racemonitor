@@ -74,9 +74,31 @@ color: rgb(255, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>50</y>
-      <width>541</width>
-      <height>71</height>
+      <y>10</y>
+      <width>576</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_BestLapTime">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>130</y>
+      <width>576</width>
+      <height>120</height>
      </rect>
     </property>
     <property name="font">
