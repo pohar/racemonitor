@@ -75,7 +75,7 @@ color: rgb(255, 0, 0);</string>
      <rect>
       <x>130</x>
       <y>10</y>
-      <width>576</width>
+      <width>631</width>
       <height>120</height>
      </rect>
     </property>
@@ -92,12 +92,60 @@ color: rgb(255, 0, 0);</string>
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_BestLapTime">
+   <widget class="QLabel" name="label_LastLapTime">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>250</y>
+      <width>631</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Current lap:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>300</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Last lap:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DiffBestSelfTime">
     <property name="geometry">
      <rect>
       <x>130</x>
       <y>130</y>
-      <width>576</width>
+      <width>631</width>
       <height>120</height>
      </rect>
     </property>

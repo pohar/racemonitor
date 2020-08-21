@@ -1,6 +1,7 @@
 #include "RaceClient.h"
 #include "ui_MainWindow.h"
 #include <QTime>
+#include <QtMath>
 #include <QFontDatabase>
 
 void RaceClient::SetLabelFontStlye(QLabel* label, QFont& font)
@@ -36,7 +37,8 @@ RaceClient::RaceClient(QWidget *parent) :
     updater.start(10/*INTERVAL_MS*/);
     ui->setupUi(this);
     SetLabelFontStlye( ui->label_LapTime, digitalfont);
-    SetLabelFontStlye( ui->label_BestLapTime, digitalfont);
+    SetLabelFontStlye( ui->label_DiffBestSelfTime, digitalfont);
+    SetLabelFontStlye( ui->label_LastLapTime, digitalfont);
 }
 
 RaceClient::~RaceClient()
@@ -70,19 +72,21 @@ void RaceClient::readData()
 
 void RaceClient::UpdateUI()
 {
+    QTime laptime(0,0);
     if(gameinfo.isLapValid)
     {
         ui->label_LapValid->show();
         ui->label_LapInvalid->hide();
+        ui->label_LapTime->setText( laptime.addMSecs(gameinfo.lap_time_current_self*1000).toString("mm:ss.zzz") );
     }
     else
     {
         ui->label_LapValid->hide();
         ui->label_LapInvalid->show();
+        ui->label_LapTime->setText( laptime.addMSecs(gameinfo.myelapsed).toString("mm:ss.zzz") );
     }
 
-    QTime laptime(0,0);  //(54533 /*gameinfo.lap_time_current_self*/);
-    ui->label_LapTime->setText( laptime.addMSecs(gameinfo.lap_time_current_self*1000).toString("mm:ss.zzz") );
-    ui->label_BestLapTime->setText( laptime.addMSecs(gameinfo.lap_time_previous_self*1000).toString("mm:ss.zzz") );
+    ui->label_DiffBestSelfTime->setText( laptime.addMSecs(qFabs(gameinfo.time_delta_best_self)*1000).toString((gameinfo.time_delta_best_self>=0)?"+mm:ss.zzz":"-mm:ss.zzz") );
+    ui->label_LastLapTime->setText( laptime.addMSecs(gameinfo.lap_time_previous_self*1000).toString("mm:ss.zzz") );
     //ui->progressBar_LapPerc->value();
 }
